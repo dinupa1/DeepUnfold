@@ -1,0 +1,16 @@
+DY_DUMP_4pi_GMC_Jan08_LD2.root
+.DS_Store
+1911.09107.pdf
+2104.03036.pdf
+imgs
+articles
+.ipynb_checkpoints
+__pycache__
+slides/*.aux
+slides/*.log
+slides/*.nav
+slides/*.out
+slides/*.snm
+slides/*.vrb
+slides/*.toc
+*.root
