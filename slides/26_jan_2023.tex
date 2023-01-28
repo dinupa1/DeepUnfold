@@ -1,0 +1,280 @@
+% dinupa3@gmail.com
+% 26-Jan-2023
+%
+
+\documentclass[10pt, xcolor={dvipsnames}, aspectratio = 169, sans,mathserif]{beamer}
+
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[font=tiny]{caption}
+
+
+\mode<presentation>
+{
+\usefonttheme{serif}
+\setmainfont{JetBrains Mono}
+\definecolor{nmsured}{RGB}{137,18,22} % custom colors
+\setbeamercolor{title}{bg=White,fg=nmsured}
+\setbeamercolor{frametitle}{bg=White,fg=nmsured}
+\setbeamercolor{section number projected}{bg=nmsured,fg=White}
+\setbeamercolor{subsection number projected}{bg=nmsured,fg=White}
+\setbeamertemplate{items}{\color{nmsured}{\faAngleDoubleRight}}
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamercovered{invisible}
+\usefonttheme{professionalfonts}
+%\setbeamertemplate{background}[grid][color=nmsured!15] % set background
+\setbeamertemplate{navigation symbols}{} % remove navigation buttons
+}
+
+\title{Just an Idea}
+
+
+\newcommand{\leftpic}[2]
+{
+\begin{textblock}{7.0}(0.5, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+\newcommand{\rightpic}[2]
+{
+\begin{textblock}{7.0}(8.0, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\begin{frame}[fragile]{Problem ?}
+
+\leftpic{phi_costh_mc}{Generated $\phi$ vs. $\cos(\theta)$ distribution.}
+
+\rightpic{phi_costh}{Reconstructed $\phi$ vs. $\cos(\theta)$ distribution.}
+
+\begin{textblock}{13.0}(3.0, 0.5)
+\begin{itemize}
+    \item Particle level information (generated) get distorted in the detector level due to acceptance and in-efficiencies.
+\end{itemize}
+\end{textblock}
+
+\begin{textblock}{15.0}(0.5, 14.5)
+\begin{itemize}
+    \item Need a method to extract particle level information using the detector level information (measured).
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}{MNIST data and fully connected CNN's}
+
+\begin{textblock}{14.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=14.0cm]{../imgs/fully-connected-cnn.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{10.0}(0.5, 2.0)
+\begin{itemize}
+
+    \item MNIST data set : Hand written numbers with 60k train images and 10k test images.
+
+    \item Convolutional layers : Feature extraction.
+
+    \item Fully connected layers : Classification.
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{How can we use this method to our problem ?}
+
+\leftpic{gray_pic}{Reconstrued phi-costh distribution as a image. Note since we use event weight to fill the hitogram, we have scale the bin content using standard scaler in sklearn.}
+
+\begin{textblock}{7.0}(8.0, 2.0)
+\begin{itemize}
+    \item We can assume bins in histogram is same as pixels in an image. We use reconstrued drell-yan events with \verb|FPGA1| trigger with $4.5 < mass < 8.0$.
+
+    \item Input = \verb|phi-costh| 2D histogram and target = [$\lambda$, $\mu$, $\nu$].
+
+    \item We created 293 \verb|phi-costh| histograms with $\lambda$, $\mu$, $\nu$ = 1.0, 0.0, 0.0.
+
+    \item Histograms were split to train: validation: test = 60: 20: 20.
+
+    \item With batch size = 10, learning rate = 0.01, L2 penalty =  0.001 and epochs = 20.
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+
+\leftpic{loss_curve}{Loss curve}
+
+\begin{textblock}{7.0}(8.0, 1.0)
+\begin{itemize}
+
+    \item Use fully connected CNN with regression (instead of classification as in MNIST data).
+
+    \item We test the trained \verb|CNN| with 10 images. Average values are;
+
+    \begin{verbatim}
+lambda = 1.0019 +/- 0.0037
+mu = -0.0006 +/- 0.0002
+nu = 0.0006 +/- 0.0005
+    \end{verbatim}
+
+    \item This results is biased (only one target).
+
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Pseudo data}
+
+\begin{textblock}{15.0}(0.5, 2.0)
+\begin{itemize}
+    \item We create $\phi = [-\pi, \pi]$ and $\theta = [0., \pi]$ randomly.
+
+    \item Weights were created as $z = \lambda + \mu \cos(\phi) + \mu \phi^{2} \cos(\theta)$ and $\lambda, \mu, \nu = [-1.0, 1.0]$ created randomly.
+
+    \item Smearing were introduced for both $\theta$ and $\phi$ with;
+
+    \begin{verbatim}
+    double smear(double xt)
+    {
+    double xsmear = gRandom->Gaus(-0.5, 1.0);
+    return xt + xsmear;
+    }
+    \end{verbatim}
+
+\end{itemize}
+\end{textblock}
+
+\begin{textblock}{4.0}(3.0, 8.5)
+\begin{figure}
+    \centering
+    \includegraphics[width=4.0cm]{../imgs/lambda.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{4.0}(7.0, 8.5)
+\begin{figure}
+    \centering
+    \includegraphics[width=4.0cm]{../imgs/mu.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{4.0}(11.0, 8.5)
+\begin{figure}
+    \centering
+    \includegraphics[width=4.0cm]{../imgs/nu.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{textblock}{15.0}(0.5, 2.0)
+\begin{itemize}
+
+    \item We create 60k histograms with 50k events per histogram. All the variables $[\phi, \theta, \lambda, \mu, \nu]$ are created randomly.
+
+    \item Input = 2D histogram of $\phi$ vs. $\cos(\theta)$ and target is $\lambda, \mu, \nu$. Our goal is to predict generated $\lambda, \mu, \nu$.
+\end{itemize}
+\end{textblock}
+
+\begin{textblock}{5.0}(0.5, 6.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/without_smearing.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(6.0, 6.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/with_smearing.png}
+    %\caption{#2}
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+\leftpic{loss_toy}{Loss curve for toy data.}
+
+\begin{textblock}{7.0}(8.0, 2.0)
+\begin{itemize}
+
+    \item CNN is tested with 15 histograms with $\lambda, \mu, \nu = [0.7, 0.4, 0.3]$. The average values of the predictios are;
+
+    \begin{verbatim}
+    lambda = 0.6492 +/- 0.0098
+    mu = 0.4881 +/- 0.0620
+    nu = 0.2280 +/- 0.0686
+    \end{verbatim}
+
+    \item Results are not that impressive. But can be improved.
+
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{textblock}{15.0}(0.5, 2.0)
+\begin{itemize}
+
+    \item $\lambda$, $\mu$, $\nu$ is introduced to the generated data by weights.
+
+    \item If we can produce 2D histograms with different $\lambda$, $\mu$, $\nu$ may be we can get better results.
+
+    \item Git repo. \url{https://github.com/dinupa1/unfoldML}
+
+    \item To do:
+
+    \begin{itemize}
+
+        \item Plan to do a efficiency study after the survay is done.
+
+        \item Plan to do a false asymmetry study for $J/\psi$ production.
+    \end{itemize}
+
+\end{itemize}
+\end{textblock}
+
+\end{frame}
+
+\end{document}
