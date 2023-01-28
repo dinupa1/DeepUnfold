@@ -1,0 +1,13 @@
+name: unfoldml
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - pytorch
+  - numpy
+  - matplotlib
+  - uproot
+  - pandas
+  - scikit-learn
+  - awkward
+  - hist
