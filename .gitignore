@@ -14,3 +14,4 @@ slides/*.snm
 slides/*.vrb
 slides/*.toc
 *.root
+MakeHist.cc
