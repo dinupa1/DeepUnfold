@@ -1,13 +1,13 @@
-# A Machine Learinig Approach to 2D unfolding
+# A Machine Learning Approach to 2D Unfolding
 
 
-Particle level information get distorted in the detector level due to detetor inefficiencies and detector acceptance. Unfolding try make corrections to these effects while improving the particle level information.
+Particle level information get distorted in the detector level due to detetor inefficiencies and detector acceptance. Unfolding try to make corrections to these effects while improving the particle level information.
 
 
 Here we try to use fully connected CNN to extract features from the 2D histograms.
 
 
-Use following commands for thesting this repo.
+Use following commands to use repo.
 
 ```
 git clone https://github.com/dinupa1/unfoldML.git

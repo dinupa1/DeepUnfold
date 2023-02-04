@@ -11,3 +11,5 @@ dependencies:
   - scikit-learn
   - awkward
   - hist
+  - jupyter
+  - numba
