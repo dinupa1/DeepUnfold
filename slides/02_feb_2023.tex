@@ -1,0 +1,252 @@
+% dinupa3@gmail.com
+% 26-Jan-2023
+%
+
+\documentclass[10pt, xcolor={dvipsnames}, aspectratio = 169, sans,mathserif]{beamer}
+
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[font=tiny]{caption}
+
+
+\mode<presentation>
+{
+\usefonttheme{serif}
+\setmainfont{JetBrains Mono}
+\definecolor{nmsured}{RGB}{137,18,22} % custom colors
+\setbeamercolor{title}{bg=White,fg=nmsured}
+\setbeamercolor{frametitle}{bg=White,fg=nmsured}
+\setbeamercolor{section number projected}{bg=nmsured,fg=White}
+\setbeamercolor{subsection number projected}{bg=nmsured,fg=White}
+\setbeamertemplate{items}{\color{nmsured}{\faAngleDoubleRight}}
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamercovered{invisible}
+\usefonttheme{professionalfonts}
+%\setbeamertemplate{background}[grid][color=nmsured!15] % set background
+\setbeamertemplate{navigation symbols}{} % remove navigation buttons
+}
+
+\title{Just an Idea}
+
+
+\newcommand{\leftpic}[2]
+{
+\begin{textblock}{7.0}(0.5, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+\newcommand{\rightpic}[2]
+{
+\begin{textblock}{7.0}(8.0, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\begin{frame}[fragile]{Input Histograms}
+
+\leftpic{train_hist}{2D histogram used for training.}
+
+\rightpic{gray_toy}{Image of the 2D histogram. This is a conisdered as a 20 x 20 pixel imgage. Each histogram is scaled by the \href{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}{standard scalar}.}
+
+\begin{textblock}{15.0}(0.5, 12.0)
+\begin{itemize}
+
+    \item 100K histograms were generated randomly with $\lambda, \mu, \nu$ (as targets) in range [-1.0, 1.0] and they are split in to test: validate: train = 60: 20: 20.
+
+\end{itemize}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{CNN Architecture}
+\begin{textblock}{15.0}(0.5, 2.0)
+\begin{itemize}
+
+    \item Feature extraction;
+
+    \begin{itemize}
+        \item 2 convolutional layers.
+        \item 2 max pooling layers.
+        \item activated by ReLu activation function.
+    \end{itemize}
+
+    \item Regression layers;
+
+    \begin{itemize}
+        \item 3 linear layers.
+        \item Activated by ReLu activation function.
+    \end{itemize}
+
+    \item Learning rate = 0.001 and L2 regulation = 1.0e-05.
+
+    \item DNN was trained for 50 epochs.
+\end{itemize}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Loss Curve}
+
+\leftpic{loss_curve}{Loss curve.}
+
+\end{frame}
+
+\begin{frame}{Testing}
+
+\begin{textblock}{5.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_lambda.png}
+    \caption{Test $\lambda$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(5.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_mu.png}
+    \caption{Test $\mu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(10.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_nu.png}
+    \caption{Test $\nu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{15.0}(0.5, 11.0)
+
+\begin{itemize}
+    \item Results are promising ?
+\end{itemize}
+
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}{$[\lambda, \mu, \nu] = [0.5, 0.0, 0.0] \sigma = 0.1$}
+
+\begin{textblock}{5.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_lambda3.png}
+    \caption{Test $\lambda$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(5.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_mu3.png}
+    \caption{Test $\mu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(10.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_nu3.png}
+    \caption{Test $\nu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}{$[\lambda, \mu, \nu] = [0.5, 0.0, 0.0] \sigma = 0.05$}
+
+\begin{textblock}{5.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_lambda2.png}
+    \caption{Test $\lambda$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(5.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_mu2.png}
+    \caption{Test $\mu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(10.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_nu2.png}
+    \caption{Test $\nu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}{$[\lambda, \mu, \nu] = [1.0, 0.0, 0.0] \sigma = 0.01$}
+
+\begin{textblock}{5.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_lambda1.png}
+    \caption{Test $\lambda$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(5.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_mu1.png}
+    \caption{Test $\mu$ distribution.}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{5.0}(10.0, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=5.0cm]{../imgs/test_nu1.png}
+    \caption{Test $\nu$ distribution.}
+\end{figure}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}{Other}
+
+\begin{textblock}{15.0}(0.5, 2.0)
+
+\begin{itemize}
+
+    \item
+
+\end{itemize}
+
+\end{textblock}
+
+\end{frame}
+
+\end{document}
