@@ -1,0 +1,141 @@
+% dinupa3@gmail.com
+% 26-Jan-2023
+%
+
+\documentclass[10pt, xcolor={dvipsnames}, aspectratio = 169, sans,mathserif]{beamer}
+
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[font=tiny]{caption}
+
+
+\mode<presentation>
+{
+\usefonttheme{serif}
+\setmainfont{JetBrains Mono}
+\definecolor{nmsured}{RGB}{137,18,22} % custom colors
+\setbeamercolor{title}{bg=White,fg=nmsured}
+\setbeamercolor{frametitle}{bg=White,fg=nmsured}
+\setbeamercolor{section number projected}{bg=nmsured,fg=White}
+\setbeamercolor{subsection number projected}{bg=nmsured,fg=White}
+\setbeamertemplate{items}{\color{nmsured}{\faAngleDoubleRight}}
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamercovered{invisible}
+\usefonttheme{professionalfonts}
+%\setbeamertemplate{background}[grid][color=nmsured!15] % set background
+\setbeamertemplate{navigation symbols}{} % remove navigation buttons
+}
+
+\title{Just an Idea}
+
+
+\newcommand{\leftpic}[2]
+{
+\begin{textblock}{7.0}(0.5, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+\newcommand{\rightpic}[2]
+{
+\begin{textblock}{7.0}(8.0, 1.0)
+\begin{figure}
+    \centering
+    \includegraphics[width=7.0cm]{../imgs/#1.png}
+    \caption{#2}
+\end{figure}
+\end{textblock}
+}
+
+\newcommand{\slide}[2]
+{
+\begin{frame}{#1}
+\begin{textblock}{5.0}(0.5, 2.0)
+\begin{figure}
+    \centering
+    \includegraphics[height=7.0cm]{../imgs/#2.png}
+\end{figure}
+\end{textblock}
+\end{frame}
+}
+
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\begin{frame}[fragile]{Input Histograms}
+
+\leftpic{input_hist}{2D histogram used for training.}
+
+\rightpic{gray_scale}{Image of the 2D histogram. This is a conisdered as a 20 x 20 pixel imgage. Each histogram is scaled by the \href{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}{standard scalar}.}
+
+\begin{textblock}{15.0}(0.5, 12.0)
+\begin{itemize}
+
+    \item 100K histograms were generated randomly with $\lambda, \mu, \nu$ (as targets) in range [-1.0, 1.0] and they are split in to train: validation = 70: 30.
+
+\end{itemize}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{CNN Architecture}
+\begin{textblock}{15.0}(0.5, 2.0)
+\begin{itemize}
+
+    \item Feature extraction;
+
+    \begin{itemize}
+        \item 2 convolutional layers.
+        \item 2 max pooling layers.
+        \item activated by ReLu activation function.
+    \end{itemize}
+
+    \item Regression layers;
+
+    \begin{itemize}
+        \item 3 linear layers.
+        \item Activated by ReLu activation function.
+    \end{itemize}
+
+    \item Learning rate = 0.001 and L2 regulation = 1.0e-04.
+
+    \item CNN was trained for 50 epochs.
+\end{itemize}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Loss Curve}
+
+\leftpic{loss}{Loss curve.}
+
+\end{frame}
+
+\slide{Test: $\lambda = \text{uniform}(-1., 1.0)$}{test_lambda_0_}
+\slide{Test: $\mu = \text{uniform}(-1., 1.0)$}{test_mu_0_}
+\slide{Test: $\nu = \text{uniform}(-1., 1.0)$}{test_nu_0_}
+
+\slide{Test: $\lambda = \text{gaus}(0.3, 0.01)$}{test_lambda_1_}
+\slide{Test: $\mu = \text{gaus}(0.0, 0.01)$}{test_mu_1_}
+\slide{Test: $\nu = \text{gaus}(0.0, 0.01)$}{test_nu_1_}
+
+\slide{Test: $\lambda = \text{gaus}(0.2, 0.01)$}{test_lambda_2_}
+\slide{Test: $\mu = \text{gaus}(-0.1, 0.01)$}{test_mu_2_}
+\slide{Test: $\nu = \text{gaus}(0.1, 0.01)$}{test_nu_2_}
+
+\end{document}

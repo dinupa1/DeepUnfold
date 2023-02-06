@@ -1,0 +1,41 @@
+dataset:
+    path: ../data/*.root
+
+    train_data:
+
+        name: train_hist_0_
+            ditribution: uniform
+            lambda: -1.0, 1.0
+            mu: -1.0, 1.0
+            nu: -1.0, 1.0
+            events: 100000
+
+        # name: train_hist_1_
+        #     ditribution: gaus, sigma=0.02
+        #     lambda: 0.0
+        #     mu: 0.0
+        #     nu: 0.0
+        #     events: 50000
+
+    test_data:
+
+        name: test_hist_0_
+            distribution: uniform
+            lambda: -1.0, 1.0
+            mu: -1.0, 1.0
+            nu: -1.0, 1.0
+            events: 30000
+
+        name: test_hist_1_
+            distribution: gaus, sigma=0.01
+            lambda: 0.3
+            mu: 0.0
+            nu: 0.0
+            events: 30000
+
+        name: test_hist_2_
+            distribution: gaus, sigma=0.01
+            lambda: 0.2
+            mu: -0.1
+            nu: 0.1
+            events: 30000
