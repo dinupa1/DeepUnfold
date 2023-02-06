@@ -18,4 +18,4 @@ conda activate unfoldml
 
 Follow documentation [here](https://github.com/conda-forge/miniforge) to install `miniforge`
 
-For more information [here](slides/05_feb_2023.tex).
+For more information [here](slides/05_feb_2023.pdf).
