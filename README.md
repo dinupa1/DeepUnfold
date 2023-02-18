@@ -1,11 +1,11 @@
-# A Machine Learning Approach to 2D Unfolding
+# Iterative Bayesian DNN 
 
 
-Particle level information get distorted in the detector level due to detetor inefficiencies and detector acceptance. Unfolding try to make corrections to these effects while improving the particle level information.
+Particle level information get distorted in the detector level due to detector inefficiencies and detector acceptance. Unfolding try to make corrections to these effects while improving the particle level information.
 
+Here we try to use a deep neural network with iterative Bayesian reweighing for unfolding problem.
 
-Here we try to use fully connected CNN to extract features from the 2D histograms.
-
+This is based on the [DeepBayes](https://github.com/ahill187/DeepBayes) module.
 
 Use following commands to use repo.
 
