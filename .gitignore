@@ -1,5 +1,6 @@
 DY_DUMP_4pi_GMC_Jan08_LD2.root
 .DS_Store
+.idea
 1911.09107.pdf
 2104.03036.pdf
 imgs
@@ -16,3 +17,4 @@ slides/*.toc
 *.root
 MakeHist.cc
 *.pt
+*.ipynb
