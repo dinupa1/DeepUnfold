@@ -42,7 +42,7 @@ Hist(hist.axis.Regular(bins, -pi, pi, name="phi [rad]")).fill(train_tree["x"].ar
 plt.xlabel("phi [rad]")
 plt.ylabel("counts")
 plt.legend()
-plt.save("imgs/test.png")
+plt.savefig("imgs/test.png")
 # plt.show()
 
 
