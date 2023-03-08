@@ -1,15 +1,14 @@
-name: unfoldml
+name: DeepUnfold
 channels:
   - pytorch
   - conda-forge
 dependencies:
+  - python >= 3.10
   - pytorch
   - numpy
+  - pandas
   - matplotlib
   - uproot
-  - pandas
   - scikit-learn
   - awkward
-  - hist
-  - jupyter
   - numba
