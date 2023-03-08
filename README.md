@@ -10,8 +10,8 @@ This is based on the [OmniFold](https://github.com/ahill187/DeepBayes) algorithm
 For cloning the repository use;
 
 ```
-git clone https://github.com/dinupa1/unfoldML.git
-cd unfoldML
+https://github.com/dinupa1/DeepUnfold.git
+cd DeepUnfold
 conda env create -f environment.yml
 conda activate DeepUnfold
 ```
