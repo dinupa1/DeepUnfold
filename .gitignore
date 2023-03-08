@@ -15,6 +15,6 @@ slides/*.snm
 slides/*.vrb
 slides/*.toc
 *.root
-MakeHist.cc
-*.pt
-*.ipynb
+03March2023.*
+20_feb_2023.*
+23_Feb_2023.*
